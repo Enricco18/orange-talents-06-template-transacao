@@ -22,7 +22,7 @@ public class SaveTransactions {
     @PersistenceContext
     private EntityManager manager;
 
-    @KafkaListener(topics = "transacoes")
+    @KafkaListener(topics = "${transaction.topic.name}")
     @Transactional
     public void listen(TransactionEvent transactionEvent) {
         logger.info(transactionEvent.toString());
