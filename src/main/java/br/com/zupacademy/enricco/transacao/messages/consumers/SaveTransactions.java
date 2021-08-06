@@ -26,8 +26,14 @@ public class SaveTransactions {
     @Transactional
     public void listen(TransactionEvent transactionEvent) {
         logger.info(transactionEvent.toString());
+        PaymentCard card = manager.find(PaymentCard.class,transactionEvent.getCartao_Id());
 
-        Transaction transaction = transactionEvent.toModel();
+        if(card==null){
+            card = new PaymentCard(transactionEvent.getCartao_Id(),transactionEvent.getCartaoEmail());
+            manager.persist(card);
+        }
+
+        Transaction transaction = transactionEvent.toModel(card);
 
         manager.persist(transaction);
     }

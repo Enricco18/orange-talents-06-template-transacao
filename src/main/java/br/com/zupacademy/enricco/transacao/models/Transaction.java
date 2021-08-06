@@ -23,11 +23,7 @@ public class Transaction {
             @AttributeOverride(name = "address", column = @Column(name = "institution_address"))
     })
     private Institution institution;
-    @Embedded
-    @AttributeOverrides(value = {
-            @AttributeOverride(name = "id", column = @Column(name = "paymentcard_id")),
-            @AttributeOverride(name = "email", column = @Column(name = "paymentcard_email"))
-    })
+    @ManyToOne
     private PaymentCard card;
 
     @Deprecated
@@ -40,5 +36,17 @@ public class Transaction {
         this.transactionDate = transactionDate;
         this.institution = institution;
         this.card = card;
+    }
+
+    public BigDecimal getValue() {
+        return value;
+    }
+
+    public LocalDateTime getTransactionDate() {
+        return transactionDate;
+    }
+
+    public String getInstitutionName() {
+        return institution.getName();
     }
 }

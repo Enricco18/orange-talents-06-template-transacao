@@ -38,6 +38,10 @@ public class TransactionEvent {
     public Cartao getCartao() {
         return cartao;
     }
+    public String getCartaoEmail() {
+        return this.cartao.email;
+    }
+
 
     @Override
     public String toString() {
@@ -47,11 +51,11 @@ public class TransactionEvent {
                 '}';
     }
 
-    public Transaction toModel() {
-        PaymentCard paymentCard = cartao.toModel();
+    public Transaction toModel(PaymentCard card) {
         Institution institution = estabelecimento.toModel();
-        return new Transaction(UUID.fromString(id),valor,efetivadaEm,institution,paymentCard);
+        return new Transaction(UUID.fromString(id),valor,efetivadaEm,institution,card);
     }
+
 
     public class Estabelecimento{
         private String nome;

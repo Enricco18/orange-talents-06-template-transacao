@@ -17,4 +17,8 @@ public class Institution {
         this.city = city;
         this.address = address;
     }
+
+    public String getName() {
+        return name;
+    }
 }

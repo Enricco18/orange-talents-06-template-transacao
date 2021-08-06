@@ -4,8 +4,9 @@ import javax.persistence.*;
 import javax.validation.constraints.Email;
 import java.util.List;
 
-@Embeddable
+@Entity
 public class PaymentCard {
+    @Id
     private String id;
     @Email
     private String email;
